@@ -4,10 +4,10 @@ A simple frontend web project built using HTML, CSS, and JavaScript.
 
 📁 Project Structure
 .
-├── index.html      # Main HTML file
-├── index.css       # Styling file
-├── index.js        # JavaScript functionality
-└── README.md       # Project documentation
+├── index.html      
+├── index.css    
+├── index.js        
+└── README.md      
 
 
 🚀 Features
