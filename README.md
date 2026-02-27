@@ -21,7 +21,9 @@ Beginner-friendly project structure
 🛠️ Technologies Used
 
 HTML5
+
 CSS3
+
 JavaScript (ES6)
 
 
