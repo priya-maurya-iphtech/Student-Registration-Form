@@ -13,8 +13,11 @@ A simple frontend web project built using HTML, CSS, and JavaScript.
 🚀 Features
 
 Clean and structured HTML layout
+
 Styled using CSS
+
 Interactive functionality with JavaScript
+
 Beginner-friendly project structure
 
 
@@ -30,9 +33,13 @@ JavaScript (ES6)
 ▶️ How to Run the Project
 
 Download or clone the repository
+
 Open the project folder
+
 Double-click on index.html
+
 OR
+
 Open it using Live Server in VS Code
 
 
