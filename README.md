@@ -57,14 +57,9 @@ Beginner-friendly project structure
 
 This project is created for learning and practicing frontend development concepts. 
 
----
-
-## 🌐 Live Demo
-
-🔗 [View Project Live](https://priya-maurya-iphtech.github.io/Student-Registration-Form/)
 
 ---
 
-## ![Project Review](Form.png)
+## ![Project Review](newForm.png)
 
 ---
