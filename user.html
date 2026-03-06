@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Students</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E6D6FF, #F3E9FF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        .header {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: black;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .header h3:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(145deg, rgb(108, 46, 149) 0%, rgb(126, 58, 127) 70%, rgb(100, 53, 128) 100%);
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-back {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, rgb(198, 170, 241), rgb(168, 108, 241));
+            color: white;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(200, 80, 192, 0.4);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgb(198, 170, 241), rgb(168, 108, 241));
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stats-label {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .stats-value {
+            font-size: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            background: #f8f9fa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        th {
+            background: linear-gradient(135deg, rgb(198, 170, 241), rgb(168, 108, 241));
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+            font-size: 14px;
+            background: white;
+        }
+
+        tr:hover td {
+            background: #f0f0f0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        .no-data a {
+            color: #C850C0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .no-data a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .btn-back {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h3>REGISTERED STUDENTS</h3>
+            <div class="header-actions">
+                <div class="stats-card">
+                    <span class="stats-label">Total Students</span>
+                    <span class="stats-value" id="totalStudents">0</span>
+                </div>
+                <a href="index.html" class="btn-back">+ New Registration</a>
+                <button class="btn-back" id="clearDataBtn" style="background: linear-gradient(135deg, rgb(198, 170, 241), rgb(168, 108, 241));">Clear Data</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STUDENT ID</th>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>EMAIL</th>
+                        <th>PHONE</th>
+                        <th>COURSE</th>
+                        <th>AADHAAR</th>
+                        <th>ADDRESS</th>
+                        <th>PASSWORD</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const tableBody = document.getElementById('usersTableBody');
+            const totalSpan = document.getElementById('totalStudents');
+
+            totalSpan.textContent = users.length;
+
+            if (users.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="no-data">
+                            No students registered yet. 
+                            <a href="index.html">Register now</a>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let tableHTML = '';
+            [...users].reverse().forEach(user => {
+                const aadhaar = user.aadhaar || 'N/A';
+
+                tableHTML += `
+                    <tr>
+                        <td><strong>${user.studentId || 'N/A'}</strong></td>
+                        <td>${user.firstName || ''}</td>
+                        <td>${user.lastName || ''}</td>
+                        <td>${user.email || 'N/A'}</td>
+                        <td>${user.phone || 'N/A'}</td>
+                        <td>${user.course || 'N/A'}</td>
+                        <td>${aadhaar}</td>
+                        <td>${user.address || 'N/A'}</td>
+                        
+                        <td>${user.password ? '********' : 'N/A'}</td>
+                    </tr>
+                `;
+            });
+
+            tableBody.innerHTML = tableHTML;
+        }
+        document.getElementById("clearDataBtn").addEventListener("click", function () {
+        localStorage.removeItem("users");
+         loadUsers();
+        });
+        setInterval(loadUsers, 30000);
+        document.addEventListener('DOMContentLoaded', loadUsers);
+    </script>
+</body>
+
+</html>
