@@ -207,7 +207,9 @@ flex-direction:column;
 <th>PHONE</th>
 <th>COURSE</th>
 <th>AADHAAR</th>
-<th>ADDRESS</th>
+<th>STREET</th>
+<th>STATE</th>
+<th>DISTRICT</th>
 <th>PASSWORD</th>
 <th>ACTION</th> 
 </tr>
@@ -249,6 +251,8 @@ tableHTML+=`
 <td>${user.course||'N/A'}</td>
 <td>${aadhaar}</td>
 <td>${user.address||'N/A'}</td>
+<td>${user.state || 'N/A'}</td>
+<td>${user.district || 'N/A'}</td>
 <td>${user.password?'********':'N/A'}</td>
 <td><button class="btn-back" onclick="editUser(${index})">Edit</button></td>
 </tr>
