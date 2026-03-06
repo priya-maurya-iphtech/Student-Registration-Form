@@ -1,5 +1,28 @@
 (function () {
+    if (editIndex !== null) {
 
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let user = users[editIndex];
+
+        if (user) {
+
+            document.getElementById("firstName").value = user.firstName;
+            document.getElementById("lastName").value = user.lastName;
+            document.getElementById("email").value = user.email;
+            document.getElementById("phone").value = user.phone;
+            document.getElementById("studentId").value = user.studentId;
+            document.getElementById("dob").value = user.dob;
+            document.getElementById("course").value = user.course;
+            document.getElementById("address").value = user.address;
+            document.getElementById("aadhaar").value = user.aadhaar;
+            document.getElementById("source").value = user.source;
+
+            document.querySelector(`input[name="gender"][value="${user.gender}"]`).checked = true;
+
+            document.getElementById("pass").value = user.password;
+            document.getElementById("confirmPass").value = user.password;
+        }
+    }
     function showError(inputElem, message) {
         const errorSpan = inputElem.parentElement.querySelector('.error-msg');
         if (errorSpan) errorSpan.textContent = message;
@@ -38,30 +61,7 @@
 
     let editIndex = localStorage.getItem("editUserIndex");
 
-    if (editIndex !== null) {
-
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        let user = users[editIndex];
-
-        if (user) {
-
-            document.getElementById("firstName").value = user.firstName;
-            document.getElementById("lastName").value = user.lastName;
-            document.getElementById("email").value = user.email;
-            document.getElementById("phone").value = user.phone;
-            document.getElementById("studentId").value = user.studentId;
-            document.getElementById("dob").value = user.dob;
-            document.getElementById("course").value = user.course;
-            document.getElementById("address").value = user.address;
-            document.getElementById("aadhaar").value = user.aadhaar;
-            document.getElementById("source").value = user.source;
-
-            document.querySelector(`input[name="gender"][value="${user.gender}"]`).checked = true;
-
-            document.getElementById("pass").value = user.password;
-            document.getElementById("confirmPass").value = user.password;
-        }
-    }
+    
 
 
     document.getElementById('registerBtn').addEventListener('click', function (e) {
